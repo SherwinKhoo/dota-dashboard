@@ -22,9 +22,8 @@ User Interface
 Prioritisation
 
 1. Achieve minimum viable product
-   a. Search for game ID by player.
-   b. Search for game ID by team.
-2.
+   Search for game ID by player.
+   Search for game ID by team.
 
 Goals and Milestones
 
@@ -36,6 +35,19 @@ Motivation
 2. Add to portfolio
 
 Approach Taken
+
+Data Structure
+
+<App />
+    <Login />
+    <PlayerContainer />
+        <PlayerSelected />
+        <PlayerList />
+        <PlayerProfile />
+    <TeamContainer />
+        <TeamSelected />
+        <TeamList />
+        <TeamProfile />
 
 Lessons Learnt
 
