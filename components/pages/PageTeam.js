@@ -4,8 +4,9 @@ import TeamContainer from "../team/TeamContainer";
 const PageTeam = () => {
   return (
     <>
-      <h1>Team</h1>
+      <br />
       <TeamContainer />
+      <br />
     </>
   );
 };

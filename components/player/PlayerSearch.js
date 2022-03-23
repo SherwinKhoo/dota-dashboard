@@ -13,15 +13,21 @@ const PlayerSearch = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={handleChange}
-          value={props.playerSelection}
-          text="text"
-          placeholder="Enter player name"
-        />
-        <button>Search</button>
-      </form>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <button>Load Players</button>
+          <br />
+          <br />
+          <input
+            className="playerInput"
+            onChange={handleChange}
+            value={props.playerSelection}
+            text="text"
+            placeholder="Enter player name"
+          />
+          <br />
+        </form>
+      </div>
     </>
   );
 };

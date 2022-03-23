@@ -2,27 +2,41 @@ import React from "react";
 
 const PlayerList = (props) => {
   const playerListFiltered = props.playerList.map((list, index) => {
+    const handleClick = () => {
+      props.setPlayerAccountID(list.account_id);
+      props.fetchPlayerMatchList(list.account_id);
+      props.fetchHeroStatsList();
+      props.setPlayerHasSearched(true);
+    };
     return (
-      <div key={index}>
+      <>
         {list.name
           .toLowerCase()
           .includes(props.playerSelection.toLowerCase()) ? (
-          <>
-            <div className="playerAvatar">
-              <img src={list.avatarmedium} alt={list.name} />
+          <div key={index} className="playerList">
+            <div className="avatar">
+              <img
+                src={list.avatarfull}
+                alt={list.name}
+                onClick={handleClick}
+              />
             </div>
-            <div className="playerListData">
-              <name className="name">Name: {list.name}</name>
-              <team className="team">Team: {list.team_name}</team>
-              <button className="button">Get matches</button>
+            <div className="listData">
+              <div className="playerName" onClick={handleClick}>
+                {list.name}
+                <div className="playerTeam">{list.team_name}</div>
+              </div>
+              {/* <button className="button" onClick={handleClick}>
+                Get matches
+              </button> */}
             </div>
             <br />
-          </>
+          </div>
         ) : null}
-      </div>
+      </>
     );
   });
-  return <>{playerListFiltered}</>;
+  return <div className="container">{playerListFiltered}</div>;
 };
 
 export default PlayerList;

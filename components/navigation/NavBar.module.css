@@ -1,6 +1,6 @@
 .navbar {
   height: 2rem;
-  background-color: red;
+  background-color: rgb(27, 27, 27);
 }
 
 .navbar nav {
@@ -20,17 +20,24 @@
 .navbar li {
   margin: 0 1rem;
   width: 10rem;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .navbar a {
   color: white;
   text-decoration: none;
+  padding: 10px;
 }
 
-.navbar a:hover,
 .navbar a:active,
 .navbar a.active {
-  color: whitesmoke;
-  padding-bottom: 0.25rem;
-  border-bottom: 4px solid whitesmoke;
+  color: white;
+  padding: 0.25rem;
+  border-bottom: 4px solid rgb(255, 153, 0);
+}
+
+.navbar a:hover {
+  border: 2px solid white;
+  border-radius: 15px;
 }

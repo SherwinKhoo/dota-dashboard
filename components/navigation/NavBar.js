@@ -10,9 +10,17 @@ const NavBar = () => {
           <li>
             <NavLink
               className={(navData) => (navData.isActive ? styles.active : "")}
+              to="/api"
+            >
+              API
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={(navData) => (navData.isActive ? styles.active : "")}
               to="/player"
             >
-              Players
+              PLAYERS
             </NavLink>
           </li>
           <li>
@@ -20,7 +28,7 @@ const NavBar = () => {
               className={(navData) => (navData.isActive ? styles.active : "")}
               to="/team"
             >
-              Teams
+              TEAMS
             </NavLink>
           </li>
         </ul>

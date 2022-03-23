@@ -13,15 +13,19 @@ const TeamSearch = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={handleChange}
-          value={props.teamSelection}
-          text="text"
-          placeholder="Enter team name"
-        />
-        <button>Search</button>
-      </form>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <button>Load Teams</button>
+          <br />
+          <br />
+          <input
+            onChange={handleChange}
+            value={props.teamSelection}
+            text="text"
+            placeholder="Enter team name"
+          />
+        </form>
+      </div>
     </>
   );
 };

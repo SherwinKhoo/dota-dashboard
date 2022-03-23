@@ -4,8 +4,9 @@ import PlayerContainer from "../player/PlayerContainer";
 const PagePlayer = () => {
   return (
     <>
-      <h1>Player</h1>
+      <br />
       <PlayerContainer />
+      <br />
     </>
   );
 };
