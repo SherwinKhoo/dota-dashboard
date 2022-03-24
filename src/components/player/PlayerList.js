@@ -3,7 +3,7 @@ import React from "react";
 const PlayerList = (props) => {
   const playerListFiltered = props.playerList.map((list, index) => {
     const handleClick = () => {
-      props.setPlayerAccountID(list.account_id);
+      // props.setPlayerAccountID(list.account_id);
       props.fetchPlayerMatchList(list.account_id);
       props.fetchHeroStatsList();
       props.setPlayerHasSearched(true);
@@ -13,7 +13,7 @@ const PlayerList = (props) => {
         {list.name
           .toLowerCase()
           .includes(props.playerSelection.toLowerCase()) ? (
-          <div key={index} className="playerList col-md-3">
+          <div key={index} className="playerList col-md-2">
             <div className="avatar">
               {list.avatarfull ? (
                 <img

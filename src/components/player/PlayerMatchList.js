@@ -13,18 +13,13 @@ const PlayerMatchList = (props) => {
 
     // const playerHeroSource = `https://api.opendota.com${playerHero.img}api_key=69fa7262-4da6-43f4-86ce-e69839682f49`;
 
-    // const epochTimeInSeconds = list.start_time;
-    // const humanTime = new Date(0);
-    // const gameTime = humanTime.setUTCSeconds(parseInt(epochTimeInSeconds));
-
     let epochTimeInSeconds = list.start_time;
     epochTimeInSeconds = Number(epochTimeInSeconds);
     const date = new Date(epochTimeInSeconds * 1000);
     const formattedDate = JSON.stringify(date).slice(1, 11);
-    console.log(formattedDate);
 
     return (
-      <div key={index} className="matchList col-md-3">
+      <div key={index} className="matchList col-md-2">
         {/* <img className="heroImage" src={list.hero_id} /> */}
         <img className="heroImage" src={ICONS[playerHero.id]} />
         <div className="heroAttr">
@@ -52,9 +47,6 @@ const PlayerMatchList = (props) => {
         <button className="centered row" onClick={onSearchAgain}>
           Search again
         </button>
-        <h5>{}</h5>
-        <br />
-        <br />
         <div className="container">{playerMatchListFiltered}</div>
       </div>
     </>

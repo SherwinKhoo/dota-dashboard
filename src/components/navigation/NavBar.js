@@ -18,7 +18,7 @@ const NavBar = () => {
           <li>
             <NavLink
               className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/hero"
+              to="/search-hero"
             >
               HEROES
             </NavLink>
@@ -26,7 +26,7 @@ const NavBar = () => {
           <li>
             <NavLink
               className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/player"
+              to="/search-player-recent-matches"
             >
               PLAYERS
             </NavLink>
@@ -34,7 +34,7 @@ const NavBar = () => {
           <li>
             <NavLink
               className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/team"
+              to="/search-team-matches"
             >
               TEAMS
             </NavLink>

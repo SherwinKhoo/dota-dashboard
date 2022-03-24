@@ -4,7 +4,7 @@ import PlayerSearch from "./PlayerSearch";
 import PlayerMatchList from "./PlayerMatchList";
 import InvokerSpinner from "../spinner/LoadingSpinner";
 
-const PlayerContainer = () => {
+const PlayerContainer = (props) => {
   // contents of input box in <PlayerSearch/>
   const [playerSelection, setPlayerSelection] = useState("");
   // list of players in <PlayerList/>
@@ -48,7 +48,6 @@ const PlayerContainer = () => {
   const fetchPlayerList = async () => {
     setPlayerIsLoading(true);
     setPlayerError(null);
-
     try {
       const playerURL = `https://api.opendota.com/api/proPlayers?api_key=${apiKey}`;
       const responsePlayerList = await fetch(playerURL);

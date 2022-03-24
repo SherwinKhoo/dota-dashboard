@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ICONS from "../images/icon/index.js";
+import GREYSCALE from "../images/greyscale/index.js";
 import InvokerSpinner from "../spinner/LoadingSpinner";
-import statsStats from "../json/heroStats.json";
+// import statsStats from "../json/heroStats.json";
 
 const HeroContainer = () => {
   // contents of input box
@@ -85,12 +86,23 @@ const HeroContainer = () => {
 
     return (
       <div key={index}>
-        <img
-          onClick={handleClick}
-          className="heroImage heroPage"
-          src={ICONS[list.hero_id]}
-          alt={list.localized_name}
-        />
+        {list.localized_name
+          .toLowerCase()
+          .includes(heroSelection.toLowerCase()) ? (
+          <img
+            onClick={handleClick}
+            className="heroImage heroPage"
+            src={ICONS[list.hero_id]}
+            alt={list.localized_name}
+          />
+        ) : (
+          <img
+            onClick={handleClick}
+            className="greyscale heroImage heroPage"
+            src={GREYSCALE[list.hero_id]}
+            alt={list.localized_name}
+          />
+        )}
       </div>
     );
   });

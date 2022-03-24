@@ -8,7 +8,7 @@ const TeamMatchList = (props) => {
   console.log(props.teamMatchList);
   const teamMatchListFiltered = props.teamMatchList.map((list, index) => {
     return (
-      <div key={index} className="matchList col-md-3">
+      <div key={index} className="matchList col-md-2">
         <div className="matchTeam orange">
           <h5>{list.match_id}</h5>
         </div>
