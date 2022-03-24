@@ -11,7 +11,7 @@ const TeamList = (props) => {
     return (
       <>
         {list.name.toLowerCase().includes(props.teamSelection.toLowerCase()) ? (
-          <div key={index} className="teamList col-md-2">
+          <div key={index} className="teamList col-md-3">
             <div className="avatar">
               {list.logo_url ? (
                 <img

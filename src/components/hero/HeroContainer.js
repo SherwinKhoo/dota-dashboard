@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ICONS from "../images/icon/index.js";
 import InvokerSpinner from "../spinner/LoadingSpinner";
+import statsStats from "../json/heroStats.json";
 
 const HeroContainer = () => {
   // contents of input box
@@ -11,6 +12,20 @@ const HeroContainer = () => {
   // loading and error handling when fetching hero data
   const [heroStatsIsLoading, setHeroStatsIsLoading] = useState("");
   const [heroStatsError, setHeroStatsError] = useState(null);
+
+  const [hasSearched, setHasSearched] = useState(false);
+
+  // recall from localStorage
+  useEffect(() => {
+    const heroStatsStore = localStorage.getItem("heroStatsStore");
+    if (heroStatsStore) {
+      setHeroStats(JSON.parse(heroStatsStore)); // parse back from strong
+    }
+  }, []); // only render once
+
+  useEffect(() => {
+    localStorage.setItem("heroStatsStore", JSON.stringify(heroStats)); // can only save string
+  });
 
   const apiKey = `69fa7262-4da6-43f4-86ce-e69839682f49`;
 
@@ -57,12 +72,21 @@ const HeroContainer = () => {
     setHeroSelection(event.target.value);
   };
 
+  const handleClick = (event) => {
+    event.preventDefault();
+    if (hasSearched === true) {
+      setHasSearched(false);
+    }
+    setHasSearched(true);
+  };
+
   const heroFiltered = heroStats.map((list, index) => {
     // const iWillBeYourHero = heroStats.filter((ID) => ID.id === list.hero_id);
 
     return (
       <div key={index}>
         <img
+          onClick={handleClick}
           className="heroImage heroPage"
           src={ICONS[list.hero_id]}
           alt={list.localized_name}

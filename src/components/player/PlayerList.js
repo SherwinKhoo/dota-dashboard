@@ -13,7 +13,7 @@ const PlayerList = (props) => {
         {list.name
           .toLowerCase()
           .includes(props.playerSelection.toLowerCase()) ? (
-          <div key={index} className="playerList col-md-2">
+          <div key={index} className="playerList col-md-3">
             <div className="avatar">
               {list.avatarfull ? (
                 <img
