@@ -1,0 +1,14 @@
+Steam Web API
+Key: 0657880103B4B8D09C1B82B225617375
+
+
+OpenDota API
+add             ?api_key=
+followed by     69fa7262-4da6-43f4-86ce-e69839682f49
+at the end of query
+
+https://api.opendota.com/api/matches/271145478?api_key=69fa7262-4da6-43f4-86ce-e69839682f49
+
+
+
+iceiceice account id 84772440

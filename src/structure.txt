@@ -1,0 +1,13 @@
+<App />
+
+    <Login /> => enter API key here
+
+    <PlayerContainer />
+        <PlayerSelected />
+        <PlayerList />
+        <PlayerProfile />
+
+    <TeamContainer />
+        <TeamSelected />
+        <TeamList />
+        <TeamProfile />

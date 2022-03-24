@@ -44,10 +44,12 @@ Data Structure
         <PlayerSelected />
         <PlayerList />
         <PlayerProfile />
+        <PlayerMatches>
     <TeamContainer />
         <TeamSelected />
         <TeamList />
         <TeamProfile />
+        <TeamMatches />
 
 Lessons Learnt
 
