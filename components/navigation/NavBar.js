@@ -18,6 +18,14 @@ const NavBar = () => {
           <li>
             <NavLink
               className={(navData) => (navData.isActive ? styles.active : "")}
+              to="/hero"
+            >
+              HEROES
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={(navData) => (navData.isActive ? styles.active : "")}
               to="/player"
             >
               PLAYERS

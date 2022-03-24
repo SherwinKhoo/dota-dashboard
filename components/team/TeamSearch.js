@@ -14,11 +14,10 @@ const TeamSearch = (props) => {
   return (
     <>
       <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="row">
           <button>Load Teams</button>
-          <br />
-          <br />
           <input
+            className="teamInput"
             onChange={handleChange}
             value={props.teamSelection}
             text="text"

@@ -1,14 +1,16 @@
 import React from "react";
+import ICONS from "../images/icon/index.js";
 
 const TeamMatchList = (props) => {
   const onSearchAgain = () => {
     props.setTeamHasSearched(false);
   };
+
   const teamMatchListFiltered = props.teamMatchList.map((list, index) => {
     return (
-      <div key={index}>
-        <div className="matchTeam">
-          <h5>Match ID: {list.match_id}</h5>
+      <div key={index} className="matchList col-md-2">
+        <div className="matchTeam orange">
+          <h5>{list.match_id}</h5>
         </div>
         <div className="matchStats">
           <h5>
@@ -24,7 +26,7 @@ const TeamMatchList = (props) => {
     <>
       <button onClick={onSearchAgain}>Search again</button>
       <br />
-      {teamMatchListFiltered}
+      <div>{teamMatchListFiltered}</div>
     </>
   );
 };

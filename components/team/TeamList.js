@@ -4,20 +4,34 @@ const TeamList = (props) => {
   const teamListFiltered = props.teamList.map((list, index) => {
     const handleClick = () => {
       props.setTeamID(list.team_id);
-      props.fetchTeamMatchList();
+      props.fetchTeamMatchList(list.team_id);
+      props.fetchHeroStatsList();
       props.setTeamHasSearched(true);
     };
     return (
       <>
-        {list.nam.toLowerCase().includes(props.teamSelection.toLowerCase()) ? (
-          <div key={index}>
+        {list.name.toLowerCase().includes(props.teamSelection.toLowerCase()) ? (
+          <div key={index} className="teamList col-md-2">
             <div className="avatar">
-              <img src={list.logo_url} alt={list.name} onClick={handleClick} />
+              {list.logo_url ? (
+                <img
+                  className="teamAvatar"
+                  src={list.logo_url}
+                  alt={list.name}
+                  onClick={handleClick}
+                />
+              ) : (
+                <img
+                  className="teamAvatar"
+                  src="https://cdn.browshot.com/static/images/not-found.png"
+                  alt="Image not found."
+                />
+              )}
             </div>
             <div className="listData">
-              <name className="name" onClick={handleClick}>
+              <div className="name" onClick={handleClick}>
                 {list.name}
-              </name>
+              </div>
               {/* <button className="button" onClick={handleClick}>
                 Get matches
               </button> */}
@@ -28,7 +42,7 @@ const TeamList = (props) => {
       </>
     );
   });
-  return <>{teamListFiltered}</>;
+  return <div className="container">{teamListFiltered}</div>;
 };
 
 export default TeamList;

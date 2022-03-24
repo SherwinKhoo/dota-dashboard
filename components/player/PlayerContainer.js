@@ -1,24 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlayerList from "./PlayerList";
 import PlayerSearch from "./PlayerSearch";
 import PlayerMatchList from "./PlayerMatchList";
+import InvokerSpinner from "../spinner/LoadingSpinner";
 
 const PlayerContainer = () => {
+  // contents of input box in <PlayerSearch/>
   const [playerSelection, setPlayerSelection] = useState("");
+  // list of players in <PlayerList/>
   const [playerList, setPlayerList] = useState([]);
+  // loading and error handling when fetching player data to populate <PlayerList/>
   const [playerIsLoading, setPlayerIsLoading] = useState("");
   const [playerError, setPlayerError] = useState(null);
 
   const [playerAccountID, setPlayerAccountID] = useState(``);
+  // most recent 20 matches in <PlayerMatchList/>
   const [playerMatchList, setPlayerMatchList] = useState([]);
+  // loading and error handling when fetching match data to populate <PlayerMatchList/>
   const [playerMatchIsLoading, setPlayerMatchIsLoading] = useState("");
   const [playerMatchError, setPlayerMatchError] = useState(null);
 
+  // basic stats for all 124 heroes
   const [heroStats, setHeroStats] = useState([]);
+  // loading and error handling when fetching hero data
   const [heroStatsIsLoading, setHeroStatsIsLoading] = useState("");
   const [heroStatsError, setHeroStatsError] = useState(null);
 
+  // toggle between <PlayerList/> and <PlayerMatchList/>
   const [playerHasSearched, setPlayerHasSearched] = useState(false);
+
+  // const [apiKey, setAPIKey] = useState(``);
+
+  // recall from localStorage
+  useEffect(() => {
+    const playerListStore = localStorage.getItem("playerListStore");
+    if (playerListStore) {
+      setPlayerList(JSON.parse(playerListStore)); // parse back from strong
+    }
+  }, []); // only render once
+
+  useEffect(() => {
+    localStorage.setItem("playerListStore", JSON.stringify(playerList)); // can only save string
+  });
 
   const apiKey = `69fa7262-4da6-43f4-86ce-e69839682f49`;
 
@@ -42,12 +65,12 @@ const PlayerContainer = () => {
     setPlayerIsLoading(false);
   };
 
-  const fetchPlayerMatchList = async (match) => {
+  const fetchPlayerMatchList = async (account_id) => {
     setPlayerMatchIsLoading(true);
     setPlayerMatchError(null);
 
     try {
-      const playerMatchURL = `https://api.opendota.com/api/players/${match}/recentMatches?api_key=${apiKey}`;
+      const playerMatchURL = `https://api.opendota.com/api/players/${account_id}/recentMatches/?api_key=${apiKey}`;
       const responsePlayerMatchList = await fetch(playerMatchURL);
 
       if (responsePlayerMatchList.status !== 200) {
@@ -97,13 +120,15 @@ const PlayerContainer = () => {
               />
             </div>
             <h5>
-              {playerMatchIsLoading && <p>Loading... please wait</p>}
+              {/* {playerMatchIsLoading && <p>Loading... please wait</p>} */}
+              {playerMatchIsLoading && <InvokerSpinner />}
               {!playerMatchIsLoading && playerMatchError && (
                 <p>{playerMatchError}</p>
               )}
             </h5>
             <h5>
               {heroStatsIsLoading && <p>Loading... please wait</p>}
+              {/* {heroStatsIsLoading && <InvokerSpinner />} */}
               {!heroStatsIsLoading && heroStatsError && <p>{heroStatsError}</p>}
             </h5>
           </>
@@ -117,7 +142,8 @@ const PlayerContainer = () => {
               />
             </div>
             <h5>
-              {playerIsLoading && <p>Loading... please wait</p>}
+              {/* {playerIsLoading && <p>Loading... please wait</p>} */}
+              {playerIsLoading && <InvokerSpinner />}
               {!playerIsLoading && playerError && <p>{playerError}</p>}
             </h5>
             <div className="playerList">

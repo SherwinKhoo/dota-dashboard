@@ -13,18 +13,27 @@ const PlayerList = (props) => {
         {list.name
           .toLowerCase()
           .includes(props.playerSelection.toLowerCase()) ? (
-          <div key={index} className="playerList">
+          <div key={index} className="playerList col-md-2">
             <div className="avatar">
-              <img
-                src={list.avatarfull}
-                alt={list.name}
-                onClick={handleClick}
-              />
+              {list.avatarfull ? (
+                <img
+                  className="playerAvatar"
+                  src={list.avatarfull}
+                  alt={list.name}
+                  onClick={handleClick}
+                />
+              ) : (
+                <img
+                  className="playerAvatar"
+                  src="https://cdn.browshot.com/static/images/not-found.png"
+                  alt="Image not found."
+                />
+              )}
             </div>
             <div className="listData">
-              <div className="playerName" onClick={handleClick}>
+              <div className="playerName orange" onClick={handleClick}>
                 {list.name}
-                <div className="playerTeam">{list.team_name}</div>
+                <div className="playerTeam grey">{list.team_name}</div>
               </div>
               {/* <button className="button" onClick={handleClick}>
                 Get matches

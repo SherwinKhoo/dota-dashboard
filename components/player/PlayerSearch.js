@@ -14,10 +14,8 @@ const PlayerSearch = (props) => {
   return (
     <>
       <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="row">
           <button>Load Players</button>
-          <br />
-          <br />
           <input
             className="playerInput"
             onChange={handleChange}
