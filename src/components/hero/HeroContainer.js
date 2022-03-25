@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ICONS from "../images/icon/index.js";
 import GREYSCALE from "../images/greyscale/index.js";
 import InvokerSpinner from "../spinner/LoadingSpinner";
-// import statsStats from "../json/heroStats.json";
+import statsStats from "../json/heroStats.json";
 
 const HeroContainer = () => {
   // contents of input box
@@ -13,6 +13,8 @@ const HeroContainer = () => {
   // loading and error handling when fetching hero data
   const [heroStatsIsLoading, setHeroStatsIsLoading] = useState("");
   const [heroStatsError, setHeroStatsError] = useState(null);
+
+  const [heroID, setHeroID] = useState(``);
 
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -44,11 +46,8 @@ const HeroContainer = () => {
 
       const heroStatsData = await responseHeroStatsList.json();
 
-      //   const heroStatsDataSorted = heroStatsData.sort((a, b) => {
-      //     return a.name - b.name;
-      //   });
-
-      const heroStatsDataSorted = heroStatsData.sort((a, b) =>
+      // const heroStatsDataSorted = heroStatsData.sort((a, b) =>
+      const heroStatsDataSorted = statsStats.sort((a, b) =>
         a.localized_name
           .toLowerCase()
           .localeCompare(b.localized_name.toLowerCase())
@@ -75,15 +74,10 @@ const HeroContainer = () => {
 
   const handleClick = (event) => {
     event.preventDefault();
-    if (hasSearched === true) {
-      setHasSearched(false);
-    }
-    setHasSearched(true);
+    setHeroID(event.target.id);
   };
 
   const heroFiltered = heroStats.map((list, index) => {
-    // const iWillBeYourHero = heroStats.filter((ID) => ID.id === list.hero_id);
-
     return (
       <div key={index}>
         {list.localized_name
@@ -94,6 +88,7 @@ const HeroContainer = () => {
             className="heroImage heroPage"
             src={ICONS[list.hero_id]}
             alt={list.localized_name}
+            id={list.hero_id}
           />
         ) : (
           <img
@@ -101,33 +96,55 @@ const HeroContainer = () => {
             className="greyscale heroImage heroPage"
             src={GREYSCALE[list.hero_id]}
             alt={list.localized_name}
+            id={list.hero_id}
           />
         )}
       </div>
     );
   });
 
+  console.log(heroID);
+  console.log(statsStats);
+
+  const heroProfile = statsStats.map((list, index) => {
+    const heroIndividual = statsStats.find((ID) => ID.id === heroID);
+    return (
+      <div key={index}>
+        <img src={ICONS[heroIndividual.id]} />
+        <div>{heroIndividual.localized_name}</div>
+      </div>
+    );
+    console.log(heroIndividual);
+  });
+
   return (
     <>
       <div className="container">
-        <form onSubmit={handleSubmit} className="row">
-          <button>Load Heroes</button>
-          <input
-            className="heroInput"
-            onChange={handleChange}
-            value={heroSelection}
-            text="text"
-            placeholder="Enter hero name"
-          />
-          <br />
-        </form>
+        <div>
+          <form onSubmit={handleSubmit} className="row">
+            <button>Load Heroes</button>
+            <input
+              className="heroInput"
+              onChange={handleChange}
+              value={heroSelection}
+              text="text"
+              placeholder="Enter hero name"
+            />
+          </form>
+        </div>
+        <h5>
+          {/* {heroStatsIsLoading && <p>Loading... please wait</p>} */}
+          {heroStatsIsLoading && <InvokerSpinner />}
+          {!heroStatsIsLoading && heroStatsError && <p>{heroStatsError}</p>}
+        </h5>
       </div>
-      <div className="container heroList">{heroFiltered}</div>
-      <h5>
-        {/* {heroStatsIsLoading && <p>Loading... please wait</p>} */}
-        {heroStatsIsLoading && <InvokerSpinner />}
-        {!heroStatsIsLoading && heroStatsError && <p>{heroStatsError}</p>}
-      </h5>
+      <div className="container profile">
+        <div className="heroList col-md-6">{heroFiltered}</div>
+        <div className="col-md-6">
+          <img className="heroProfile" src={ICONS[heroID]} />
+          {/* <div>{heroProfile}</div> */}
+        </div>
+      </div>
     </>
   );
 };

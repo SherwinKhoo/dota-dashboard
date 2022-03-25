@@ -6,6 +6,7 @@ const PlayerMatchList = (props) => {
   const onSearchAgain = () => {
     props.setPlayerHasSearched(false);
   };
+
   const playerMatchListFiltered = props.playerMatchList.map((list, index) => {
     // const playerHero = ICONS.find((ID) => ID === list.hero_id);
     // const playerHero = props.heroStats.find((ID) => ID.id === list.hero_id);
@@ -40,7 +41,7 @@ const PlayerMatchList = (props) => {
       </div>
     );
   });
-  console.log(playerMatchListFiltered);
+
   return (
     <>
       <div>
