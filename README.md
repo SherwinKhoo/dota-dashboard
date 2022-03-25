@@ -40,20 +40,21 @@ Motivation
 
 Approach Taken
 
-1. Peruse some sites, purely for academic purposes.
-   "... sites are very good at giving people what they want in the quickest way possible."
+1. "... sites are very good at giving people what they want in the quickest way possible." Peruse sites for genuine academic purposes.
 2. Peruse DotA websites for inspiration.
-3. Have a page for entering the **API key** as a form of "login" credentials instead of saying it in a hidden file / folder.
-4. Contain as many states as possible in one component for ease of management.
-5. Lift and prop states via **useState**
+3. Have a page for entering the **API key** as a form of "login" credentials instead of saving it in a hidden file / folder.
+4. Contain as many states as possible in one component for ease of management. Could potentially get messy as more states are added.
+5. Lift and prop states via **useState**.
 6. Call a function when **onSubmit={}** is triggered to **fetch()** data from the API and/or **setState**.
-7. Use **onChange={}** within an input box filter through data.
+7. Use **onChange={}** within an input box to filter through results from **fetch()**.
 8. Use two **useEffect()** functions in conjunction with **localStorage** to save data in the browser, to minimise API calls.
 9. Include a navigation bar with **custom CSS** and use **Navlink** for navigating between different **Routes**.
 10. Remember to include **BrowserRouter** in index.js
-11. Create custom images and hardcode them as backup should the API become unreliable when calling for hero images.
+11. Create custom images and hardcode them as backup should the API become unreliable when calling for hero images. Create an index.js file in the same folder to handle pathing. Two sets of the same images created, one in colour and one in greyscale. Assiging a **className** and applying the **CSS** property **filter: grayscale(100%)** seemed to mess with pre-existing **:hover** effects, regardless of whether it was placed before or after said **:hover** effect.
 12. Use **Navigate** to set a specific page when first loading the website, i.e., at the "/" path/
 13. Include a news ticker for DotA related news, pinned to the top of the page, for more bonus brownie points. Ticker was taken from **rss.app** and simply added to HTML.
+14. Use **useNavigate()** to set the "home" page when the website logo is clicked.
+15. Use **React.lazy()** to import page pathing.
 
 Data Structure
 
