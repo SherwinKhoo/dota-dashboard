@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ICONS from "../images/icon/index.js";
 import GREYSCALE from "../images/greyscale/index.js";
+import ATTR from "../images/attribute/index.js";
 import InvokerSpinner from "../spinner/LoadingSpinner";
 import statsStats from "../json/heroStats.json";
 
@@ -15,8 +16,8 @@ const HeroContainer = () => {
   const [heroStatsError, setHeroStatsError] = useState(null);
 
   const [heroID, setHeroID] = useState(``);
-  const [heroName, setHeroName] = useState(``);
-  const [heroAttr, setHeroAttr] = useState(``);
+  // const [heroName, setHeroName] = useState(``);
+  // const [heroAttr, setHeroAttr] = useState(``);
 
   // recall from localStorage
   useEffect(() => {
@@ -75,8 +76,8 @@ const HeroContainer = () => {
   const handleClick = (event) => {
     event.preventDefault();
     setHeroID(event.target.id);
-    setHeroName(event.target.alt);
-    setHeroAttr(event.target.text);
+    // setHeroName(event.target.alt);
+    // setHeroAttr(event.target.text);
   };
 
   const heroFiltered = heroStats.map((list, index) => {
@@ -109,18 +110,22 @@ const HeroContainer = () => {
   console.log(heroID);
   console.log(statsStats);
 
-  // const heroProfile = heroStats.map((list, index) => {
-  //   if (list.id === heroID) {
-  //     return (
-  //       <div key={index}>
-  //         <img src={ICONS[heroID]} alt="" />
-  //         <div>{list.localized_name}</div>
-  //         <div>{list.primary_attr}</div>
-  //         <div>{list.attack_type}</div>
-  //       </div>
-  //     );
-  //   }
-  // });
+  const heroProfile = statsStats.map((list, index) => {
+    if (parseInt(list.id) === parseInt(heroID)) {
+      return (
+        <div key={index}>
+          <img className="heroProfile" src={ICONS[heroID]} alt="" />
+          <br />
+          <br />
+          <h4>
+            {list.localized_name} <img src={ATTR[list.primary_attr]} />{" "}
+            <img src={ATTR[list.attack_type]} />
+          </h4>
+          <h5>{list.attack_type}</h5>
+        </div>
+      );
+    }
+  });
 
   return (
     <>
@@ -146,12 +151,7 @@ const HeroContainer = () => {
       <div className="container profile">
         <div className="heroList col-md-6">{heroFiltered}</div>
         <div className="col-md-6">
-          <img className="heroProfile" src={ICONS[heroID]} />
-          {/* <h5>Name: </h5>
-          <h5>Primary Attribute:</h5>
-          <h5>Roles: </h5>
-          <h5>Movespeed: </h5> */}
-          {/* <div>{heroProfile}</div> */}
+          <div>{heroProfile}</div>
         </div>
       </div>
     </>
