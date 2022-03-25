@@ -1,6 +1,6 @@
 # sei_35_p2_dotahub
 
-Software Engineering Immersive - Project 2 - Dota Dashboard
+Software Engineering Immersive - Project 2 - Dotahub
 
 Project: Build a functional Dota Dashboard in a week.
 
@@ -52,6 +52,8 @@ Approach Taken
 9. Include a navigation bar with **custom CSS** and use **Navlink** for navigating between different **Routes**.
 10. Remember to include **BrowserRouter** in index.js
 11. Create custom images and hardcode them as backup should the API become unreliable when calling for hero images.
+12. Use **Navigate** to set a specific page when first loading the website, i.e., at the "/" path/
+13. Include a news ticker for DotA related news, pinned to the top of the page, for more bonus brownie points. Ticker was taken from **rss.app** and simply added to HTML.
 
 Data Structure
 
