@@ -35,7 +35,7 @@ const TeamContainer = () => {
   useEffect(() => {
     const teamListStore = localStorage.getItem("teamListStore");
     if (teamListStore) {
-      setTeamList(JSON.parse(teamListStore)); // parse back from strong
+      setTeamList(JSON.parse(teamListStore)); // parse back from string
     }
   }, []); // only render once
 
@@ -111,6 +111,7 @@ const TeamContainer = () => {
       <div>
         {teamHasSearched ? (
           <>
+            <h1>UNDER CONSTRUCTION</h1>
             <div>
               <TeamMatchList
                 teamMatchList={teamMatchList}

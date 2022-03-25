@@ -35,7 +35,7 @@ const PlayerContainer = (props) => {
   useEffect(() => {
     const playerListStore = localStorage.getItem("playerListStore");
     if (playerListStore) {
-      setPlayerList(JSON.parse(playerListStore)); // parse back from strong
+      setPlayerList(JSON.parse(playerListStore)); // parse back from string
     }
   }, []); // only render once
 

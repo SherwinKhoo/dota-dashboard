@@ -10,13 +10,17 @@ const OneContainerToRuleThemAll = () => {
   useEffect(() => {
     const apiStore = localStorage.getItem("apiStore");
     if (apiStore) {
-      setApiKey(JSON.parse(apiStore)); // parse back from strong
+      setApiKey(JSON.parse(apiStore)); // parse back from string
     }
   }, []); // only render once
+
+  console.log(apiKey);
 
   useEffect(() => {
     localStorage.setItem("apiStore", JSON.stringify(apiKey)); // can only save string
   });
+
+  console.log(apiKey);
 
   return (
     <>
