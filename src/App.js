@@ -28,7 +28,7 @@ const App = () => {
         <main>
           <Suspense fallback={<p>Did you miscast?</p>}>
             <Routes>
-              <Route path="/" element={<Navigate replace to="hero" />} />
+              <Route path="/" element={<Navigate replace to="api" />} />
               <Route path="/api" element={<PageAPI />} />
               <Route path="/search-hero" element={<PageHero />} />
               <Route
