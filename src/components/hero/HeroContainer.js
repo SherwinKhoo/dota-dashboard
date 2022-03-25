@@ -15,8 +15,8 @@ const HeroContainer = () => {
   const [heroStatsError, setHeroStatsError] = useState(null);
 
   const [heroID, setHeroID] = useState(``);
-
-  const [hasSearched, setHasSearched] = useState(false);
+  const [heroName, setHeroName] = useState(``);
+  const [heroAttr, setHeroAttr] = useState(``);
 
   // recall from localStorage
   useEffect(() => {
@@ -75,6 +75,8 @@ const HeroContainer = () => {
   const handleClick = (event) => {
     event.preventDefault();
     setHeroID(event.target.id);
+    setHeroName(event.target.alt);
+    setHeroAttr(event.target.text);
   };
 
   const heroFiltered = heroStats.map((list, index) => {
@@ -89,6 +91,7 @@ const HeroContainer = () => {
             src={ICONS[list.hero_id]}
             alt={list.localized_name}
             id={list.hero_id}
+            text={list.primary_attr}
           />
         ) : (
           <img
@@ -106,16 +109,18 @@ const HeroContainer = () => {
   console.log(heroID);
   console.log(statsStats);
 
-  const heroProfile = statsStats.map((list, index) => {
-    const heroIndividual = statsStats.find((ID) => ID.id === heroID);
-    return (
-      <div key={index}>
-        <img src={ICONS[heroIndividual.id]} />
-        <div>{heroIndividual.localized_name}</div>
-      </div>
-    );
-    console.log(heroIndividual);
-  });
+  // const heroProfile = heroStats.map((list, index) => {
+  //   if (list.id === heroID) {
+  //     return (
+  //       <div key={index}>
+  //         <img src={ICONS[heroID]} alt="" />
+  //         <div>{list.localized_name}</div>
+  //         <div>{list.primary_attr}</div>
+  //         <div>{list.attack_type}</div>
+  //       </div>
+  //     );
+  //   }
+  // });
 
   return (
     <>
@@ -142,6 +147,10 @@ const HeroContainer = () => {
         <div className="heroList col-md-6">{heroFiltered}</div>
         <div className="col-md-6">
           <img className="heroProfile" src={ICONS[heroID]} />
+          {/* <h5>Name: </h5>
+          <h5>Primary Attribute:</h5>
+          <h5>Roles: </h5>
+          <h5>Movespeed: </h5> */}
           {/* <div>{heroProfile}</div> */}
         </div>
       </div>
