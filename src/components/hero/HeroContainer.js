@@ -118,10 +118,19 @@ const HeroContainer = () => {
           <br />
           <br />
           <h4>
-            {list.localized_name} <img src={ATTR[list.primary_attr]} />{" "}
-            <img src={ATTR[list.attack_type]} />
+            {list.localized_name} <img src={ATTR[list.attack_type]} />
           </h4>
-          <h5>{list.attack_type}</h5>
+          <h5>
+            <img src={ATTR[list.primary_attr]} />{" "}
+            {list.primary_attr === "str"
+              ? "Strength"
+              : list.primary_attr === "agi"
+              ? "Agility"
+              : "Intelligence"}{" "}
+            {list.attack_type}
+          </h5>
+          <br />
+          <h5>asdf</h5>
         </div>
       );
     }
