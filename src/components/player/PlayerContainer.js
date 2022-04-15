@@ -29,7 +29,7 @@ const PlayerContainer = (props) => {
   // toggle between <PlayerList/> and <PlayerMatchList/>
   const [playerHasSearched, setPlayerHasSearched] = useState(false);
 
-  // const [apiKey, setAPIKey] = useState(``);
+  const [apiKey, setAPIKey] = useState("");
 
   // recall from localStorage
   useEffect(() => {
@@ -43,7 +43,15 @@ const PlayerContainer = (props) => {
     localStorage.setItem("playerListStore", JSON.stringify(playerList)); // can only save string
   });
 
-  const apiKey = `69fa7262-4da6-43f4-86ce-e69839682f49`;
+  // retrieve API Key
+  useEffect(() => {
+    const getAPIKey = localStorage.getItem("apiStore");
+    if (getAPIKey) {
+      setAPIKey(JSON.parse(getAPIKey));
+    }
+  }, []);
+
+  console.log(apiKey);
 
   const fetchPlayerList = async () => {
     setPlayerIsLoading(true);

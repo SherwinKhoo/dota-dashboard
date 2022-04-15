@@ -1,22 +1,20 @@
 import React from "react";
 
 const API = (props) => {
-  const handleSubmit = (event) => {
+  const handleAPISubmit = (event) => {
     event.preventDefault();
-    props.setApiKey("");
   };
 
-  const handleChange = (event) => {
-    props.setApiKey(event.target.value);
+  const handleAPIChange = (event) => {
+    props.setKey(event.target.value);
   };
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleAPISubmit}>
         <input
           className="enterAPI"
-          onChange={handleChange}
-          value={props.apiKey}
+          onChange={handleAPIChange}
           text="text"
           type="password"
           placeholder="Enter API key"

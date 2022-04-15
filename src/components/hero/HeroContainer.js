@@ -5,7 +5,7 @@ import ATTR from "../images/attribute/index.js";
 import InvokerSpinner from "../spinner/LoadingSpinner";
 import statsStats from "../json/heroStats.json";
 
-const HeroContainer = () => {
+const HeroContainer = (props) => {
   // contents of input box
   const [heroSelection, setHeroSelection] = useState("");
 
@@ -19,6 +19,8 @@ const HeroContainer = () => {
   // const [heroName, setHeroName] = useState(``);
   // const [heroAttr, setHeroAttr] = useState(``);
 
+  const [apiKey, setAPIKey] = useState("");
+
   // recall from localStorage
   useEffect(() => {
     const heroStatsStore = localStorage.getItem("heroStatsStore");
@@ -31,7 +33,15 @@ const HeroContainer = () => {
     localStorage.setItem("heroStatsStore", JSON.stringify(heroStats)); // can only save string
   });
 
-  const apiKey = `69fa7262-4da6-43f4-86ce-e69839682f49`;
+  // retrieve API Key
+  useEffect(() => {
+    const getAPIKey = localStorage.getItem("apiStore");
+    if (getAPIKey) {
+      setAPIKey(JSON.parse(getAPIKey));
+    }
+  }, []);
+
+  console.log(apiKey);
 
   const fetchHeroStatsList = async () => {
     setHeroStatsIsLoading(true);
