@@ -3,7 +3,7 @@ import ICONS from "../images/icon/index.js";
 import GREYSCALE from "../images/greyscale/index.js";
 import ATTR from "../images/attribute/index.js";
 import InvokerSpinner from "../spinner/LoadingSpinner";
-import statsStats from "../json/heroStats.json";
+// import statsStats from "../json/heroStats.json";
 
 const HeroContainer = (props) => {
   // contents of input box
@@ -57,8 +57,8 @@ const HeroContainer = (props) => {
 
       const heroStatsData = await responseHeroStatsList.json();
 
-      // const heroStatsDataSorted = heroStatsData.sort((a, b) =>
-      const heroStatsDataSorted = statsStats.sort((a, b) =>
+      const heroStatsDataSorted = heroStatsData.sort((a, b) =>
+        // const heroStatsDataSorted = statsStats.sort((a, b) =>
         a.localized_name
           .toLowerCase()
           .localeCompare(b.localized_name.toLowerCase())
@@ -118,29 +118,81 @@ const HeroContainer = (props) => {
   });
 
   console.log(heroID);
-  console.log(statsStats);
+  // console.log(statsStats);
+  console.log(heroStats);
 
-  const heroProfile = statsStats.map((list, index) => {
+  const heroProfile = heroStats.map((list, index) => {
+    // const heroProfile = statsStats.map((list, index) => {
+    const heroRoles = list.roles.map((roles) => {
+      return (
+        <>
+          <h5>{roles}</h5>
+        </>
+      );
+    });
+
     if (parseInt(list.id) === parseInt(heroID)) {
       return (
         <div key={index}>
           <img className="heroProfile" src={ICONS[heroID]} alt="" />
           <br />
           <br />
-          <h4>
-            {list.localized_name} <img src={ATTR[list.attack_type]} />
-          </h4>
-          <h5>
-            <img src={ATTR[list.primary_attr]} />{" "}
-            {list.primary_attr === "str"
-              ? "Strength"
-              : list.primary_attr === "agi"
-              ? "Agility"
-              : "Intelligence"}{" "}
-            {list.attack_type}
-          </h5>
+          <div className="row">
+            <img
+              src={`https://api.opendota.com` + list.icon}
+              className="col-md-2"
+              alt=""
+              style={{ objectFit: "cover" }}
+            />
+            <h4 className="col-md-10">{list.localized_name}</h4>
+          </div>
+          <div className="row">
+            <img
+              src={ATTR[list.primary_attr]}
+              className="col-md-2"
+              style={{ objectFit: "cover" }}
+            />{" "}
+            <div className="col-md-10">
+              <h5 style={{ verticalAlign: "middle" }}>
+                {list.primary_attr === "str"
+                  ? "Strength"
+                  : list.primary_attr === "agi"
+                  ? "Agility"
+                  : "Intelligence"}{" "}
+                {list.attack_type}
+              </h5>
+            </div>
+          </div>
           <br />
-          <h5>asdf</h5>
+          <div className="row">
+            <div className="col-md-4">Roles: </div>
+            <div className="col-md-8">
+              <div>{heroRoles}</div>
+            </div>
+          </div>
+          <br />
+          <div className="row">
+            <h5 className="col-md-4">Win-rate:</h5>
+            {list.pro_pick > 0 ? (
+              <>
+                <h5
+                  className="col-md-8"
+                  style={{
+                    color:
+                      `rgb(` +
+                      (255 - Math.round((list.pro_win / list.pro_pick) * 255)) +
+                      `,` +
+                      (Math.round((list.pro_win / list.pro_pick) * 255) + 70) +
+                      `, 0)`,
+                  }}
+                >
+                  {Math.round((list.pro_win / list.pro_pick) * 10000) / 100}%
+                </h5>
+              </>
+            ) : (
+              "Not in Captain's Mode"
+            )}
+          </div>
         </div>
       );
     }
@@ -168,8 +220,8 @@ const HeroContainer = (props) => {
         </h5>
       </div>
       <div className="container profile">
-        <div className="heroList col-md-6">{heroFiltered}</div>
-        <div className="col-md-6">
+        <div className="heroList col-md-8">{heroFiltered}</div>
+        <div className="col-md-4">
           <div>{heroProfile}</div>
         </div>
       </div>

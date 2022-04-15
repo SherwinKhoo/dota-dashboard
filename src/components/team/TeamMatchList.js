@@ -1,14 +1,26 @@
-import React from "react";
-import ICONS from "../images/icon/index.js";
+import React, { useEffect, useState } from "react";
 
 const TeamMatchList = (props) => {
+  const [teams, setTeams] = useState();
+
   const onSearchAgain = () => {
     props.setTeamHasSearched(false);
   };
   console.log(props.teamMatchList);
+
+  // retrieve teams
+  useEffect(() => {
+    const getTeams = localStorage.getItem("teamListStore");
+    if (getTeams) {
+      setTeams(JSON.parse(getTeams));
+    }
+  }, []);
+
+  console.log(teams);
+
   const teamMatchListFiltered = props.teamMatchList.map((list, index) => {
     return (
-      <div key={index} className="matchList col-md-2">
+      <div key={index} className="matchList col-md-4">
         <div className="matchTeam orange">
           <h5>{list.match_id}</h5>
         </div>
@@ -24,9 +36,12 @@ const TeamMatchList = (props) => {
   });
   return (
     <>
-      <button onClick={onSearchAgain}>Search again</button>
-      <br />
-      <div>{teamMatchListFiltered}</div>
+      <div>
+        <button className="centered row" onClick={onSearchAgain}>
+          Search again
+        </button>
+        <div className="container">{teamMatchListFiltered}</div>
+      </div>
     </>
   );
 };
