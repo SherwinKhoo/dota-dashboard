@@ -1,15 +1,8 @@
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: "Roboto", sans-serif;
-  color: white;
-}
-
 body {
   margin: 0;
   background-color: black;
+  font-family: "Ubuntu Mono", monospace;
+  color: white;
 }
 
 .centered {
@@ -40,8 +33,9 @@ body {
 }
 
 .heroPage {
-  width: calc(256px * 0.35);
-  height: calc(144px * 0.35);
+  width: calc(256px * 0.4);
+  height: calc(144px * 0.4);
+  object-fit: cover;
 }
 
 .teamAvatar {
@@ -82,7 +76,7 @@ body {
 .heroList {
   display: flex;
   flex-wrap: wrap;
-  padding: 15px;
+  padding: 0px 15px;
 }
 
 .teamAvatar:hover {
@@ -125,5 +119,8 @@ h5 {
 
 .heroProfile {
   width: 100%;
-  border: none;
+}
+
+.heroFiltered {
+  margin: 0px 0px 30px 0px;
 }

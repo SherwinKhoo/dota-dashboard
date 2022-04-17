@@ -53,6 +53,10 @@ const PlayerContainer = (props) => {
 
   console.log(apiKey);
 
+  useEffect(() => {
+    fetchPlayerList();
+  }, []);
+
   const fetchPlayerList = async () => {
     setPlayerIsLoading(true);
     setPlayerError(null);
@@ -141,6 +145,7 @@ const PlayerContainer = (props) => {
           </>
         ) : (
           <>
+            <br />
             <div className="playerSearch">
               <PlayerSearch
                 playerSelection={playerSelection}

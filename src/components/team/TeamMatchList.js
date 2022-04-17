@@ -18,22 +18,24 @@ const TeamMatchList = (props) => {
 
   console.log(teams);
 
-  const teamMatchListFiltered = props.teamMatchList.map((list, index) => {
-    return (
-      <div key={index} className="matchList col-md-4">
-        <div className="matchTeam orange">
-          <h5>{list.match_id}</h5>
+  const teamMatchListFiltered = props.teamMatchList
+    .slice(0, 20)
+    .map((list, index) => {
+      return (
+        <div key={index} className="matchList col-md-4">
+          <div className="matchTeam orange">
+            <h5>{list.match_id}</h5>
+          </div>
+          <div className="matchStats">
+            <h5>
+              {list.radiant_team_id} {list.radiant_score} - {list.dire_score}{" "}
+              {list.dire_team_id}
+            </h5>
+            <h5>{list.radiant_win}</h5>
+          </div>
         </div>
-        <div className="matchStats">
-          <h5>
-            {list.radiant_team_id} {list.radiant_score} - {list.dire_score}{" "}
-            {list.dire_team_id}
-          </h5>
-          <h5>{list.radiant_win}</h5>
-        </div>
-      </div>
-    );
-  });
+      );
+    });
   return (
     <>
       <div>

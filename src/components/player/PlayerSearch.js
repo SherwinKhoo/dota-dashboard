@@ -15,9 +15,9 @@ const PlayerSearch = (props) => {
     <>
       <div className="container">
         <form onSubmit={handleSubmit} className="row">
-          <button>Load Players</button>
+          <button className="col-md-4">Reload</button>
           <input
-            className="playerInput"
+            className="playerInput col-md-8"
             onChange={handleChange}
             value={props.playerSelection}
             text="text"

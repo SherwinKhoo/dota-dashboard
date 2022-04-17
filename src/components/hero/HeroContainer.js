@@ -21,6 +21,11 @@ const HeroContainer = (props) => {
 
   const [apiKey, setAPIKey] = useState("");
 
+  // fetch heroes on screen load
+  useEffect(() => {
+    fetchHeroStatsList();
+  }, []);
+
   // recall from localStorage
   useEffect(() => {
     const heroStatsStore = localStorage.getItem("heroStatsStore");
@@ -74,7 +79,7 @@ const HeroContainer = (props) => {
     setHeroStatsIsLoading(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleReload = (event) => {
     event.preventDefault();
     fetchHeroStatsList();
   };
@@ -90,31 +95,91 @@ const HeroContainer = (props) => {
     // setHeroAttr(event.target.text);
   };
 
-  const heroFiltered = heroStats.map((list, index) => {
-    return (
-      <div key={index}>
-        {list.localized_name
-          .toLowerCase()
-          .includes(heroSelection.toLowerCase()) ? (
-          <img
-            onClick={handleClick}
-            className="heroImage heroPage"
-            src={ICONS[list.hero_id]}
-            alt={list.localized_name}
-            id={list.hero_id}
-            text={list.primary_attr}
-          />
-        ) : (
-          <img
-            onClick={handleClick}
-            className="greyscale heroImage heroPage"
-            src={GREYSCALE[list.hero_id]}
-            alt={list.localized_name}
-            id={list.hero_id}
-          />
-        )}
-      </div>
-    );
+  const heroStrFiltered = heroStats.map((list, index) => {
+    if (list.primary_attr === "str") {
+      return (
+        <>
+          {list.localized_name
+            .toLowerCase()
+            .includes(heroSelection.toLowerCase()) ? (
+            <img
+              onClick={handleClick}
+              className="heroImage heroPage"
+              src={ICONS[list.hero_id]}
+              alt={list.localized_name}
+              id={list.hero_id}
+              text={list.primary_attr}
+            />
+          ) : (
+            <img
+              onClick={handleClick}
+              className="greyscale heroImage heroPage"
+              src={GREYSCALE[list.hero_id]}
+              alt={list.localized_name}
+              id={list.hero_id}
+            />
+          )}
+        </>
+      );
+    }
+  });
+
+  const heroAgiFiltered = heroStats.map((list, index) => {
+    if (list.primary_attr === "agi") {
+      return (
+        <>
+          {list.localized_name
+            .toLowerCase()
+            .includes(heroSelection.toLowerCase()) ? (
+            <img
+              onClick={handleClick}
+              className="heroImage heroPage"
+              src={ICONS[list.hero_id]}
+              alt={list.localized_name}
+              id={list.hero_id}
+              text={list.primary_attr}
+            />
+          ) : (
+            <img
+              onClick={handleClick}
+              className="greyscale heroImage heroPage"
+              src={GREYSCALE[list.hero_id]}
+              alt={list.localized_name}
+              id={list.hero_id}
+            />
+          )}
+        </>
+      );
+    }
+  });
+
+  const heroIntFiltered = heroStats.map((list, index) => {
+    if (list.primary_attr === "int") {
+      return (
+        <>
+          {list.localized_name
+            .toLowerCase()
+            .includes(heroSelection.toLowerCase()) ? (
+            <img
+              onClick={handleClick}
+              className="heroImage heroPage"
+              src={ICONS[list.hero_id]}
+              alt={list.localized_name}
+              id={list.hero_id}
+              text={list.primary_attr}
+            />
+          ) : (
+            <img
+              onClick={handleClick}
+              className="greyscale heroImage heroPage"
+              src={GREYSCALE[list.hero_id]}
+              alt={list.localized_name}
+              id={list.hero_id}
+            />
+          )}
+        </>
+      );
+    }
   });
 
   console.log(heroID);
@@ -153,30 +218,31 @@ const HeroContainer = (props) => {
               style={{ objectFit: "cover" }}
             />{" "}
             <div className="col-md-10">
-              <h5 style={{ verticalAlign: "middle" }}>
+              <h5>
                 {list.primary_attr === "str"
                   ? "Strength"
                   : list.primary_attr === "agi"
                   ? "Agility"
-                  : "Intelligence"}{" "}
+                  : "Intelligence"}
+                &nbsp;
                 {list.attack_type}
               </h5>
             </div>
           </div>
           <br />
           <div className="row">
-            <div className="col-md-4">Roles: </div>
-            <div className="col-md-8">
+            <div className="col-md-5">Roles: </div>
+            <div className="col-md-7">
               <div>{heroRoles}</div>
             </div>
           </div>
           <br />
           <div className="row">
-            <h5 className="col-md-4">Win-rate:</h5>
+            <h5 className="col-md-5">Win-rate:</h5>
             {list.pro_pick > 0 ? (
               <>
                 <h5
-                  className="col-md-8"
+                  className="col-md-7"
                   style={{
                     color:
                       `rgb(` +
@@ -190,8 +256,81 @@ const HeroContainer = (props) => {
                 </h5>
               </>
             ) : (
-              "Not in Captain's Mode"
+              <h5 className="col-md-7">No data</h5>
             )}
+          </div>
+          <br />
+          <div className="row">
+            <h5 className="col-md-5">Attack:</h5>
+            <h5 className="col-md-7">
+              {list.base_attack_min +
+                list.base_str +
+                ` - ` +
+                (list.base_attack_max + list.base_str)}
+            </h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Attack Speed:</h5>
+            <h5 className="col-md-7">{list.attack_rate}</h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Range:</h5>
+            <h5 className="col-md-7">{list.attack_range}</h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Armour:</h5>
+            <h5 className="col-md-7">
+              &nbsp;&nbsp;
+              {Math.round(list.base_armor + list.base_agi / 6)}
+            </h5>
+            {/* <h5 className="col-md-1">
+              {`(` +
+                Math.round((list.base_armor + list.base_agi / 6) * 100) / 100 +
+                `)`}
+            </h5> */}
+          </div>
+          <br />
+          <div className="row">
+            <h5 className="col-md-5">Movespeed:</h5>
+            <h5 className="col-md-7">{list.move_speed}</h5>
+          </div>
+          <br />
+          <div className="row">
+            <h5 className="col-md-5">Health:</h5>
+            <h5 className="col-md-7">
+              {list.base_health + list.base_str * 20}
+            </h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Health Regen:</h5>
+            <h5 className="col-md-7">{list.base_health_regen}</h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Mana:</h5>
+            <h5 className="col-md-7">{list.base_mana + list.base_int * 12}</h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Mana Regen:</h5>
+            <h5 className="col-md-7">{list.base_mana_regen}</h5>
+          </div>
+          <br />
+          <div className="row">
+            <h5 className="col-md-5">Strength:</h5>
+            <h5 className="col-md-7">
+              {list.base_str + ` + ` + list.str_gain}
+            </h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Agility:</h5>
+            <h5 className="col-md-7">
+              {list.base_agi + ` + ` + list.agi_gain}
+            </h5>
+          </div>
+          <div className="row">
+            <h5 className="col-md-5">Intelligence:</h5>
+            <h5 className="col-md-7">
+              {list.base_int + ` + ` + list.int_gain}
+            </h5>
           </div>
         </div>
       );
@@ -202,10 +341,13 @@ const HeroContainer = (props) => {
     <>
       <div className="container">
         <div>
-          <form onSubmit={handleSubmit} className="row">
-            <button>Load Heroes</button>
+          <br />
+          <form className="row">
+            <button className="col-md-4" type="button" onClick={handleReload}>
+              Reload
+            </button>
             <input
-              className="heroInput"
+              className="heroInput col-md-8"
               onChange={handleChange}
               value={heroSelection}
               text="text"
@@ -220,10 +362,21 @@ const HeroContainer = (props) => {
         </h5>
       </div>
       <div className="container profile">
-        <div className="heroList col-md-8">{heroFiltered}</div>
-        <div className="col-md-4">
-          <div>{heroProfile}</div>
+        <div className="heroList col-md-8">
+          <div className="heroFiltered">
+            <h4>Strength</h4>
+            <div>{heroStrFiltered}</div>
+          </div>
+          <div className="heroFiltered">
+            <h4>Agility</h4>
+            <div>{heroAgiFiltered}</div>
+          </div>
+          <div className="heroFiltered">
+            <h4>Intelligence</h4>
+            <div>{heroIntFiltered}</div>
+          </div>
         </div>
+        <div className="col-md-4">{heroProfile}</div>
       </div>
     </>
   );
