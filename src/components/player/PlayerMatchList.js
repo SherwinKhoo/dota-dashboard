@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ICONS from "../images/icon/index.js";
 import statsStats from "../json/heroStats.json";
 
 const PlayerMatchList = (props) => {
+  const [id, setId] = useState(``);
+
   const onSearchAgain = () => {
     props.setPlayerHasSearched(false);
   };
+
+  useEffect(() => {
+    localStorage.setItem("idStore", JSON.stringify(id)); // can only save string
+  });
 
   const playerMatchListFiltered = props.playerMatchList.map((list, index) => {
     // const playerHero = ICONS.find((ID) => ID === list.hero_id);
@@ -28,6 +34,7 @@ const PlayerMatchList = (props) => {
             className="matchID orange"
             onClick={() => {
               navigator.clipboard.writeText(list.match_id);
+              setId(list.match_id);
             }}
           >
             {list.match_id}

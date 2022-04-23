@@ -127,4 +127,62 @@ h5 {
 
 .matches {
   margin: 15px 0px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.matchesID,
+.matchesTeamName,
+.matchesScore {
+  text-align: center;
+}
+
+.matchesTeamLogoContainer,
+.matchesIndividualHeroImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchesTeamLogo {
+  width: 20vw;
+  height: 20vw;
+  object-fit: cover;
+  margin-bottom: 2em;
+}
+
+.matchesHeroes {
+  width: 100%;
+}
+
+.matchesIndividualHeroImage {
+  position: relative;
+  max-width: 12vw;
+  object-fit: cover;
+}
+
+.matchesIndividualPlayerStatRadiant {
+  width: 100%;
+  text-align: left;
+}
+
+.playerName {
+  text-decoration: underline;
+}
+
+.matchesIndividualPlayerStatDire {
+  width: 100%;
+  text-align: right;
+}
+
+.matchesHeroBanContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.matchesBanImage {
+  margin: 0 0 1em 0;
+  max-width: 4vw;
 }
