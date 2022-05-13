@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import MatchGraph from "./MatchGraph.js";
 
 import ICONS from "../images/icon/index.js";
 import GREYSCALE from "../images/greyscale/index.js";
@@ -16,7 +17,7 @@ const MatchContainer = () => {
 
   const [apiKey, setAPIKey] = useState("");
 
-  console.log(matchDetails);
+  // console.log(matchDetails);
   // console.log(radiant);
   // console.log(dire);
 
@@ -25,7 +26,7 @@ const MatchContainer = () => {
     if (idStore) {
       setMatchID(JSON.parse(idStore));
     }
-    console.log(idStore);
+    // console.log(idStore);
   }, []);
 
   // retrieve API Key
@@ -44,7 +45,6 @@ const MatchContainer = () => {
 
   useEffect(() => {
     const matchStore = localStorage.getItem("matchStore");
-    console.log("it ran!", matchStore);
     if (matchStore) {
       setMatchDetails(JSON.parse(matchStore));
     }
@@ -120,23 +120,6 @@ const MatchContainer = () => {
       });
     }
   }
-
-  // console.log(radiantPicks);
-  // console.log(direPicks);
-  // setRadiant(radiantPicks);
-  // setDire(direPicks);
-
-  // cannot work
-  // cannot use temperate literals when declaring const?
-  // const function = (something) => {
-  //   const `${something}SidePick` = `${something}Picks`.map((list, index) => {
-  //     return (
-  //       <>
-  //         <div>{renderPicks(radiant)}</div>
-  //       </>
-  //     )
-  //   }
-  // }
 
   const radiantSidePick = radiantPicks.map((list, index) => {
     return (
@@ -215,8 +198,6 @@ const MatchContainer = () => {
     }
   }
 
-  console.log(radiantBans, direBans);
-
   const radiantSideBans = radiantBans.map((list, index) => {
     return <img src={GREYSCALE[list]} className="matchesBanImage" alt="" />;
   });
@@ -284,6 +265,10 @@ const MatchContainer = () => {
         </div>
         <div className="col-md-5">{direSidePick}</div>
         <div className="col-md-1 matchesHeroBanContainer">{direSideBans}</div>
+      </div>
+      <div className="row matchesChart">
+        <h5>Gold and XP Advantage</h5>
+        <MatchGraph />
       </div>
     </div>
   );
