@@ -1,36 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
-const MatchGraph = () => {
-  const [matchDetails, setMatchDetails] = useState([]);
-
-  // get match details from localStorage
-  useEffect(() => {
-    const matchStore = localStorage.getItem("matchStore");
-    if (matchStore) {
-      setMatchDetails(JSON.parse(matchStore));
-    }
-  }, []);
-
+const MatchGraph = (props) => {
   // chart stuff
   const series = [
     {
       name: "Gold Difference",
-      data: matchDetails.radiant_gold_adv,
+      data: props.matchDetails.radiant_gold_adv,
     },
     {
       name: "Experience Difference",
-      data: matchDetails.radiant_xp_adv,
+      data: props.matchDetails.radiant_xp_adv,
     },
   ];
 
   const timeSeries = [];
-  for (let i = 0; i < matchDetails.radiant_gold_adv?.length; i++) {
+  for (let i = 0; i < props.matchDetails.radiant_gold_adv?.length; i++) {
     timeSeries.push(i);
   }
 
-  console.log(matchDetails.radiant_gold_adv);
-  console.log(matchDetails.radiant_xp_adv);
+  console.log(props.matchDetails.radiant_gold_adv);
+  console.log(props.matchDetails.radiant_xp_adv);
   console.log(timeSeries);
 
   const options = {

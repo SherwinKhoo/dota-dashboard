@@ -180,7 +180,7 @@ const MatchContainer = () => {
   const bans = [];
 
   for (let i = 0; i < matchDetails.draft_timings?.length; i++) {
-    if (matchDetails.draft_timings[i].pick == false) {
+    if (matchDetails.draft_timings[i].pick === false) {
       bans.push(matchDetails.draft_timings[i].hero_id);
     }
   }
@@ -266,9 +266,10 @@ const MatchContainer = () => {
         <div className="col-md-5">{direSidePick}</div>
         <div className="col-md-1 matchesHeroBanContainer">{direSideBans}</div>
       </div>
+      <br />
       <div className="row matchesChart">
         <h5>Gold and XP Advantage</h5>
-        <MatchGraph />
+        <MatchGraph matchDetails={matchDetails} />
       </div>
     </div>
   );
