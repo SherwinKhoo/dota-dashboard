@@ -27,10 +27,19 @@ const MatchGraph = (props) => {
     chart: {
       type: "line",
     },
+    colors: ["#FFD700", "#0000FF"],
+    legend: {
+      labels: {
+        colors: ["#fff"],
+      },
+    },
     stroke: {
       curve: "smooth",
     },
-    colors: ["#FFD700", "#0000FF"],
+    tooltip: {
+      enabled: true,
+      theme: "dark",
+    },
     xaxis: {
       categories: timeSeries,
       labels: {

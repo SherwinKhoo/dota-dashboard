@@ -266,9 +266,10 @@ const MatchContainer = () => {
         <div className="col-md-5">{direSidePick}</div>
         <div className="col-md-1 matchesHeroBanContainer">{direSideBans}</div>
       </div>
-      <br />
       <div className="row matchesChart">
-        <h5>Gold and XP Advantage</h5>
+        <h4 style={{ textAlign: "center", marginTop: "50px" }}>
+          Gold and XP Advantage
+        </h4>
         <MatchGraph matchDetails={matchDetails} />
       </div>
     </div>
